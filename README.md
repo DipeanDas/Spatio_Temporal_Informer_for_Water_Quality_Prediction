@@ -25,6 +25,8 @@ This project was developed and tested with the following dependencies:
 - joblib >= 1.0.0  
 - openpyxl >= 3.0.0  
 - python-dateutil >= 2.8.0
+- scipy >= 1.7.0  
+- flask >= 2.0.0  
 ```
 
 ## ⚙️ Installation
@@ -37,8 +39,6 @@ pip install -r requirements.txt
 ## 👨‍💻 Contributors
 
 **Dipean Dasgupta** (Class of 2025, Department of CSE, IIIT Vadodara, India)<br>
-**Bishnu Prasad Sahoo** (Scientist,Forest Ecology and Climate Change Division, Forest Research Institute, Dehradun, India)<br>
+**Bishnu Prasad Sahoo** (Scientist, Forest Ecology and Climate Change Division, Forest Research Institute, Dehradun, India)<br>
 **Pramit Mazumdar** (Assistant Professor, Department of CSE, IIIT Vadodara, India)<br>
-- scipy >= 1.7.0  
-- flask >= 2.0.0  
-```
+
