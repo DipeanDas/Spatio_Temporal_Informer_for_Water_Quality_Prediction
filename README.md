@@ -32,8 +32,8 @@ This project was developed and tested with the following dependencies:
 ## ⚙️ Installation
 Clone the repository and install the required dependencies:
 ```
-git clone https://github.com/DipeanDas/Spatio_Temporal_Informer_for_Indian_River_Water_Quality_Prediction.git
-cd Spatio_Temporal_Informer_for_Indian_River_Water_Quality_Prediction
+git clone https://github.com/DipeanDas/Spatio_Temporal_Informer_for_Water_Quality_Prediction.git
+cd Spatio_Temporal_Informer_for_Water_Quality_Prediction
 pip install -r requirements.txt 
 ```
 ## 👨‍💻 Contributors
