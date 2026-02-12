@@ -1,3 +1,4 @@
+#informer.py
 import torch
 import torch.nn as nn
 from models.embed import DataEmbedding
@@ -14,16 +15,13 @@ class Informer(nn.Module):
 
         self.pred_len = pred_len
         self.output_attention = output_attention
-
-        # Attention
+        
         Attn = ProbAttention if attn == 'prob' else FullAttention
-
-        # Embedding
+        
         self.enc_embedding = DataEmbedding(enc_in, d_model, embed_type=embed, dropout=dropout)
         self.dec_embedding = DataEmbedding(dec_in, d_model, embed_type=embed, dropout=dropout)
-        self.location_embedding = nn.Embedding(n_locations, d_model)  # Spatial embedding for locations
-
-        # Encoder
+        self.location_embedding = nn.Embedding(n_locations, d_model) 
+        
         self.encoder = Encoder(
             [
                 EncoderLayer(
@@ -38,8 +36,7 @@ class Informer(nn.Module):
             norm_layer=nn.LayerNorm(d_model),
             conv_layer=ConvLayer(d_model) if distil else None
         )
-
-        # Decoder
+        
         self.decoder = Decoder(
             [
                 DecoderLayer(
@@ -57,30 +54,18 @@ class Informer(nn.Module):
             projection=nn.Linear(d_model, c_out)
         )
 
-    def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec, location_enc, location_dec):
-        """
-        Forward pass through the model.
-
-        x_enc: Encoder input (batch_x)
-        x_mark_enc: Temporal features for the encoder (batch_x_mark)
-        x_dec: Decoder input (dec_inp, typically previous predictions)
-        x_mark_dec: Temporal features for the decoder (batch_y_mark)
-        location_enc: Spatial features for the encoder (batch_location_x)
-        location_dec: Spatial features for the decoder (batch_location_y)
-        """
-        
+    def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec, location_enc, location_dec):        
         # Encoding phase
-        enc_out = self.enc_embedding(x_enc, x_mark_enc, location_enc)  # Add location embeddings to encoder input
-        enc_out = enc_out + self.location_embedding(location_enc)  # Add spatial embeddings to encoder
+        enc_out = self.enc_embedding(x_enc, x_mark_enc, location_enc)  
+        enc_out = enc_out + self.location_embedding(location_enc)  
         enc_out, attns = self.encoder(enc_out, attn_mask=None)
-
         # Decoding phase
-        dec_out = self.dec_embedding(x_dec, x_mark_dec, location_dec)  # Add location embeddings to decoder input
-        dec_out = dec_out + self.location_embedding(location_dec)  # Add spatial embeddings to decoder
+        dec_out = self.dec_embedding(x_dec, x_mark_dec, location_dec)  
+        dec_out = dec_out + self.location_embedding(location_dec)  
         dec_out, _ = self.decoder(dec_out, enc_out, x_mask=None, cross_mask=None)
-
-        # Return output based on attention configuration
+        
         if self.output_attention:
             return dec_out[:, -self.pred_len:, :], attns
         else:
-            return dec_out[:, -self.pred_len:, :]  # [B, L, D]
+            return dec_out[:, -self.pred_len:, :]  
+
