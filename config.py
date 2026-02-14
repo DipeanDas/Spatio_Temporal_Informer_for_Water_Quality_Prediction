@@ -1,7 +1,7 @@
 def get_config():
     return {
-        'model_id': 'Ganga-BOD-Test',
-        'data_path': './data/SWD_informers.csv',
+        'model_id': 'BOD-Test',
+        'data_path': 'put dataset url',
         'target': 'BOD (mg/l)',
 
         # Sequence lengths
@@ -10,36 +10,37 @@ def get_config():
         'pred_len': 1,
 
         # Model dimensions
-        'enc_in': 26,    # Total input features (24 input params + BOD = 25 features after dropping Month and Year)
-        'dec_in': 26,    # Decoder also gets 25 inputs (as the decoder expects same dimension)
-        'c_out': 1,      # Predicting 1 target (BOD)
+        'enc_in': 26,    
+        'dec_in': 26,    
+        'c_out': 1,      
 
         # Training parameters (hyperparameters for tuning)
-        'batch_size': 32,  # Experiment with 16, 32, 64
-        'epochs': 50,      # Experiment with 30, 50, 100 epochs
-        'lr': 0.0001,      # Experiment with 0.0001, 0.0005, 0.001 for learning rate
+        'batch_size': 32,  
+        'epochs': 50,      
+        'lr': 0.0001,      
 
         # Informer-specific parameters
         'factor': 5,
-        'd_model': 256,    # Experiment with 128, 256, 512 for hidden dimensions
-        'n_heads': 8,      # Experiment with 4, 8, 16 for number of attention heads
-        'e_layers': 3,     # Experiment with 2, 3, 4 layers for encoder
-        'd_layers': 2,     # Experiment with 1, 2, 3 layers for decoder
-        'd_ff': 1024,      # Experiment with 512, 1024, 2048 for feed-forward dimensions
-        'dropout': 0.1,    # Experiment with 0.1, 0.2, 0.3 for dropout rate
-        'attn': 'prob',    # Experiment with 'prob', 'full', or 'linear' for attention types
-        'embed': 'timeF',  # Use time-based embedding
-        'freq': 'm',       # Monthly data frequency
-        'activation': 'gelu',  # GELU is a good activation function for this model
-        'output_attention': False,  # Do not output attention weights
-        'distil': True,    # Use distillation for model compression
+        'd_model': 256,    
+        'n_heads': 8,      
+        'e_layers': 3,     
+        'd_layers': 2,     
+        'd_ff': 1024,      
+        'dropout': 0.1,    
+        'attn': 'prob',    
+        'embed': 'timeF',  
+        'freq': 'm',       
+        'activation': 'gelu',  
+        'output_attention': False,  
+        'distil': True,    
 
         # Others
-        'features': 'M',          # Multivariate
-        'target_idx': 25,         # BOD was column index 25 (0-based, total 26 cols before dropping Month, Year)
+        'features': 'M',          
+        'target_idx': 25,         
         'train_ratio': 0.7,
         'val_ratio': 0.15,
         'use_gpu': True,
         'num_workers': 0,
         'shuffle': True,
     }
+
