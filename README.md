@@ -15,6 +15,43 @@ An interactive **Flask-based web interface** is also developed to deploy the tra
  - Primary Target Parameter: Biochemical Oxygen Demand (BOD).  
  - Other Target Parameters:Chemical Oxygen Demand(COD),Dissolved Oxygen(DO) and Total Dissolved Solid(TDS)
 
+## 📂 Project Structure
+The model codebase is structured in the following way:
+```
+Spatio-Temporal_Informer_Model/
+│
+├── exp/
+│ └── exp_informer.py # Experiment pipeline: training, validation, testing
+│
+├── models/
+│ ├── informer.py # Core Informer model integration
+│ ├── encoder.py # Encoder layers (self-attention, conv, feedforward)
+│ ├── decoder.py # Decoder layers (masked + cross attention)
+│ ├── embed.py # Embedding layers (temporal, positional, data embedding)
+│ └── attn.py # ProbSparse & Full Attention mechanisms
+│
+├── utils/
+│ ├── tools.py # Metrics (MSE, MAE, R², PLCC, SRCC and KRCC)
+│ ├── data_loader.py # Data preprocessing + DataLoader for train/val/test
+│ └── custom_data_process.py # CSV preprocessing (scaling, feature extraction)
+│
+├── score_metrics/
+│ └── metrics.txt # Saved test scores for BOD,COD,DO,TDS
+│
+├── static/
+│ └── styles.css # CSS styling for Flask web app
+│
+├── templates/
+│ ├── index.html # Home page template
+│ └── predict.html # Prediction page template
+│
+├── config.py # Configurations (Model  training and testing parameter value setup)
+├── main.py # Entry point: Training process initiator
+├── pred_app.py # Prediction pipeline/system logic
+├── app.py # Flask application initiator
+├── requirements.txt # Python libraries and dependencies
+└── README.md # Project documentation file
+```
 ## ⚙️ Dependencies
 
 This project was developed and tested with the following dependencies:
@@ -39,9 +76,6 @@ git clone https://github.com/DipeanDas/Spatio_Temporal_Informer_for_Water_Qualit
 cd Spatio_Temporal_Informer_for_Water_Quality_Prediction
 pip install -r requirements.txt 
 ```
-## 👨‍💻 Contributors
-
-**Dipean Dasgupta** (Class of 2025, Department of CSE, IIIT Vadodara, India)<br>
-**Bishnu Prasad Sahoo** (Scientist, Forest Ecology and Climate Change Division, Forest Research Institute, Dehradun, India)<br>
-**Pramit Mazumdar** (Assistant Professor, Department of CSE, IIIT Vadodara, India)<br>
+### Notes and Precautions
+While the ST-Informer architecture is scalable and adaptable aspects like hyperparameters, sequence lengths, and preprocessing steps should be tuned according to the specific dataset and forecasting objective. For different data structures, temporal resolutions, or experimental setups, appropriate modifications to the data loading and preprocessing pipeline may be required to ensure correct training and evaluation.
 
