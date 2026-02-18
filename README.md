@@ -2,6 +2,10 @@
 This repository contains the implementation of a **Scalable Informer-based deep learning architecture** for **water quality forecasting**. The model is trained and tested on **multivariate water quality data** collected from various locations of the **16 major rivers Indian Himalayan Rivers**. Although demonstrated on the Indian Rivers dataset, the architecture is **generalizable**, **customizable** and can be applied to **other river systems or water quality monitoring datasets**.<br>
 An interactive **Flask-based web interface** is also developed to deploy the trained model for near-accurate prediction and visualization.
 
+## ST Informer Architecture
+<img width="852" height="327" alt="ST_Informer_architecture" src="https://github.com/user-attachments/assets/af97db9a-8256-4745-8044-8f1fff763ff4" />
+
+
 ## 📊Training Dataset Overview:
  - Source: Indian Himalayan River water quality dataset.
  - Time Period: 2022-2024
